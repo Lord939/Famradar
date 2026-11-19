@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KinRadar — Posizione Famiglia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+</head>
+<body>
+
+    <div class="radar-app">
+        <div id="map"></div>
+
+        <!-- TOP BAR -->
+        <header class="floating-top">
+            <div class="brand-chip">
+                <span class="pulse-dot" id="live-dot"></span>
+                <div>
+                    <strong id="room-label">Stanza Famiglia</strong>
+                    <span id="gps-status">GPS in attesa...</span>
+                </div>
+            </div>
+            <div class="top-actions">
+                <button id="btn-center-me" class="glass-btn" title="Centra su di me">La mia posizione</button>
+                <button id="btn-setup" class="glass-btn" title="Configura stanza e profilo">Impostazioni</button>
+            </div>
+        </header>
+
+        <!-- BOTTOM SHEET FAMILIARI -->
+        <section class="bottom-sheet" id="bottom-sheet">
+            <div class="sheet-handle"></div>
+            <div class="sheet-head">
+                <h2>Familiari attivi</h2>
+                <button id="btn-toggle-share" class="share-toggle active">Condivisione ON</button>
+            </div>
+            <div id="members-list" class="members-list"></div>
+        </section>
+    </div>
+
+    <!-- MODALE CONFIGURAZIONE -->
+    <div id="setup-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3>Configurazione Stanza & Profilo</h3>
+                <button id="close-setup" class="icon-btn">&times;</button>
+            </div>
+
+            <form id="form-profile" class="form-stack">
+                <label class="label">Il tuo nome</label>
+                <input type="text" id="my-name" placeholder="Es. Marco" required>
+
+                <label class="label">Il tuo colore sulla mappa</label>
+                <input type="color" id="my-color" value="#2563eb" class="color-input">
+
+                <label class="label">Codice Stanza Famiglia (uguale su tutti i telefoni)</label>
+                <input type="text" id="room-code" placeholder="Es. casa-rossi-2026" required>
+
+                <label class="label">URL Firebase Realtime Database (per vedere gli altri)</label>
+                <p class="hint">Senza questo URL vedrai solo la tua posizione su questo telefono. Con l'URL vedi in tempo reale tutti i membri della stanza.</p>
+                <input type="url" id="db-url" placeholder="https://tuo-progetto-default-rtdb.europe-west1.firebasedatabase.app">
+
+                <button type="submit" class="btn-primary">Salva e Connetti</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
